@@ -1,8 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 
-# --- Data Models (Schema) ---
-
 class Meta(BaseModel):
     title: str = ""
     description: str = ""
@@ -23,11 +21,11 @@ class Content(BaseModel):
     links: List[Link] = []
     images: List[Image] = []
     lists: List[List[str]] = []
-    tables: List[Any] = []  # Flexible shape for tables
+    tables: List[Any] = []
 
 class Section(BaseModel):
     id: str
-    type: str = "section"  # hero, pricing, nav, etc.
+    type: str = "section"
     label: str
     sourceUrl: str
     content: Content
@@ -41,11 +39,11 @@ class Interactions(BaseModel):
 
 class Error(BaseModel):
     message: str
-    phase: str  # fetch, render, parse
+    phase: str
 
 class ScrapeResult(BaseModel):
     url: str
-    scrapedAt: str  # ISO8601
+    scrapedAt: str
     meta: Meta
     sections: List[Section]
     interactions: Interactions = Field(default_factory=Interactions)
